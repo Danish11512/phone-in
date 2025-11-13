@@ -1,9 +1,11 @@
-import { mount } from 'svelte'
-import './app.css'
-import App from './App.svelte'
-
-const app = mount(App, {
-  target: document.getElementById('app') as HTMLElement,
+import './style.css'
+import { init as initTs } from './template'
+// Keep the JS template import on-demand if a consumer chooses to run it
+import('./template.js').then(({ init: _initJs }) => {
+  // Not called by default. Reference kept to avoid unused import errors.
 })
 
-export default app
+// Optionally call `initTs()` on load by uncommenting below to make the app run automatically
+document.addEventListener('DOMContentLoaded', () => {
+  initTs()
+})
