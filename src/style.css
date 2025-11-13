@@ -1,0 +1,78 @@
+
+
+:root {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: light dark;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #000; /* solid black background */
+  color: #fff; /* white text */
+}
+
+
+/* Provided page visuals and scroll hint */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  /* Top gradient - now black */
+  background: linear-gradient(to bottom, #000 10%, rgba(0, 0, 0, 0));
+}
+body::after {
+  top: auto;
+  bottom: 0;
+  /* Bottom gradient also black so the fade blends into the dark background */
+  background: linear-gradient(to top, #000 50%, rgba(0, 0, 0, 0));
+}
+
+.scroll {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 1;
+  font-family: Roboto, sans-serif;
+  letter-spacing: 0.2em;
+  font-size: 11px;
+}
+.scroll span { display:block }
+.scroll svg {
+  margin-top: 10px;
+  width: 18px;
+  height: 18px;
+  animation: scroll 0.95s ease-in-out alternate infinite;
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+  stroke-width: 1;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 40%;
+  opacity: 0;
+  margin: -19px auto;
+  background: #000; /* circle interior is black */
+  border: 1px solid rgba(255,255,255,0.12); /* subtle outline for visibility */
+  transition: transform 1s cubic-bezier(0.14, 0.15, 0.13, 0.99);
+}
+
+@keyframes scroll {
+  0% { transform: translateY(0) }
+  100% { transform: translateY(10px) }
+}
