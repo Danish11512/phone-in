@@ -4,6 +4,6 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   // default Vite configuration for vanilla TypeScript project
   server: {
-    port: 5000,
+    port: 5173,
   },
 })
