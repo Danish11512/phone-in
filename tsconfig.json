@@ -1,0 +1,24 @@
+{
+  // Do not extend `@tsconfig/svelte` to avoid deprecated options that
+  // TypeScript 5.0+ may not support. Use a local config instead.
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "bundler",
+    "target": "ESNext",
+    "module": "ESNext",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "types": ["svelte", "vite/client"],
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true
+  },
+  "include": ["src/**/*", "src/**/*.d.ts"]
+}
