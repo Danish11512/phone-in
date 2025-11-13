@@ -5,7 +5,7 @@ const app = mount(App, {
   target: document.getElementById('app') as HTMLElement,
   props: {
     name: 'Svelte'
-  }
+  } as any
 })
 
 export default app
