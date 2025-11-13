@@ -1,28 +1,79 @@
 <script lang="ts">
-  // Minimal TypeScript script block for the app
+  import { onMount, onDestroy } from 'svelte'
+  import gsap from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { ScrollSmoother } from 'gsap/ScrollSmoother'
+  import SimplexNoise from 'simplex-noise'
+
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
+
+  let wrapper: HTMLElement
+  let content: HTMLElement
+
+  let circles: HTMLElement[] = []
+  let smoother: any
+  let mainTl: any
+
+  // removed openCodePenCopy (button removed from UI)
+
+  onMount(() => {
+    const simplex = new SimplexNoise()
+    for (let i = 0; i < 5000; i++) {
+      const div = document.createElement('div')
+      div.classList.add('circle')
+      const n1 = simplex.noise2D(i * 0.003, i * 0.0033)
+      const n2 = simplex.noise2D(i * 0.002, i * 0.001)
+      const style = {
+        transform: `translate(${n2 * 200}px) rotate(${n2 * 270}deg) scale(${3 + n1 * 2}, ${3 + n2 * 2})`,
+        boxShadow: `0 0 0 .2px hsla(${Math.floor(i*0.3)}, 70%, 70%, .6)`
+      }
+      Object.assign(div.style, style)
+      content.appendChild(div)
+      circles.push(div)
+    }
+
+    smoother = ScrollSmoother.create({
+      content: content,
+      wrapper: wrapper,
+      smooth: 1,
+      effects: false
+    })
+
+    mainTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: content,
+        scrub: 0.7,
+        start: 'top 25%',
+        end: 'bottom bottom'
+      }
+    })
+
+    circles.forEach((c) => {
+      mainTl.to(c, { opacity: 1 }, 0)
+    })
+  })
+
+  onDestroy(() => {
+    if (smoother) smoother.kill()
+    if (mainTl) mainTl.kill()
+    circles.forEach((c) => c.remove())
+    circles = []
+  })
 </script>
 
-<!-- removed background image layers for a basic template -->
-
-<main>
-  <section class="section">
-    <div class="section-inner">Section 1</div>
-  </section>
-  <section class="section">
-    <div class="section-inner">Section 2</div>
-  </section>
-  <section class="section">
-    <div class="section-inner">Section 3</div>
-  </section>
-</main>
+<div id="wrapper" bind:this={wrapper}>
+  <div id="content" bind:this={content}>
+    <div class="scroll">
+      <span>SCROLL</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <line class="st1" x1="12" y1="1" x2="12" y2="22.5" />
+        <line class="st1" x1="12.1" y1="22.4" x2="18.9" y2="15.6" />
+        <line class="st1" x1="11.9" y1="22.4" x2="5.1" y2="15.6" />
+      </svg>
+    </div>
+  </div>
+</div>
 
 <style>
-  :global(html), :global(body) { height: 100%; }
-  :global(body) { margin: 0; }
-
-  /* No background image layers in this minimal template */
-
-  main { position: relative; z-index: 1; }
-  .section { height: 100vh; display: flex; align-items: center; justify-content: center; }
-  .section-inner { color: white; font-size: 3rem; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+  /* No app controls */
 </style>
