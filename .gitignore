@@ -1,0 +1,16 @@
+## Node project ignores
+node_modules/
+dist/
+
+# Local environment files
+.env
+
+# IDE/editor directories
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Vite caches
+.vite/
