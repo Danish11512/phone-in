@@ -5,6 +5,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color-scheme: light dark;
+  --uk-font: 'Orbitron', sans-serif;
 }
 
 html, body {
@@ -35,6 +36,18 @@ body::after {
   background: linear-gradient(to top, #000 50%, rgba(0, 0, 0, 0));
 }
 
+.site-title {
+  font-family: var(--uk-font);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: clamp(1.2rem, 4vw, 3.2rem);
+  margin: 32px 0 8px 0;
+  text-transform: uppercase;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+}
+
 .scroll {
   width: 100%;
   height: 100vh;
@@ -44,11 +57,12 @@ body::after {
   justify-content: center;
   position: absolute;
   z-index: 1;
-  font-family: Roboto, sans-serif;
+  font-family: var(--uk-font);
   letter-spacing: 0.2em;
   font-size: 11px;
 }
 .scroll span { display:block }
+
 .scroll svg {
   margin-top: 10px;
   width: 18px;
@@ -59,6 +73,23 @@ body::after {
   stroke-linecap: round;
   stroke-miterlimit: 10;
   stroke-width: 1;
+}
+
+.panel {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  box-sizing: border-box;
+  color: #fff;
+}
+.panel p {
+  max-width: 72ch;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #eee;
+  text-align: center;
 }
 
 .circle {

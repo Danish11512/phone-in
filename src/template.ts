@@ -35,9 +35,11 @@ export function init(): void {
 
   const Circles = content.querySelectorAll<HTMLElement>('.circle')
 
+  // find a wrapper element; prefer #wrapper, fallback to #app if present
+  const wrapperEl = document.getElementById('wrapper') || document.getElementById('app')
   const scrollerSmoother: any = ScrollSmoother.create({
     content: content,
-    wrapper: '#wrapper',
+    wrapper: wrapperEl || '#wrapper',
     smooth: 1,
     effects: false,
   })
